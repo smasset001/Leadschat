@@ -1,0 +1,407 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public user profile visible to conversational partners and link visitors",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 80, "minLength": 1 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "businessName": { "type": "string", "maxLength": 100 },
+        "businessDescription": { "type": "string", "maxLength": 1000 },
+        "customChatSlug": { "type": "string", "maxLength": 60, "pattern": "^[a-zA-Z0-9_-]+$" },
+        "role": { "type": "string", "enum": ["free", "pro", "admin"] },
+        "isPro": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "role"]
+    },
+    "UserPrivate": {
+      "title": "UserPrivate",
+      "description": "Private sensitive user data restricted strictly to owner and admin",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "mobileNumber": { "type": "string", "maxLength": 30 },
+        "approvedEntitlement": { "type": "number" },
+        "leadBalance": { "type": "number" },
+        "leadsDelivered": { "type": "number" },
+        "subscriptionStatus": { "type": "string", "enum": ["free", "pro_active", "pro_expired", "pro_suspended"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "PhoneRegistry": {
+      "title": "PhoneRegistry",
+      "description": "Unique mapping to enforce phone number uniqueness across accounts",
+      "type": "object",
+      "properties": {
+        "phone": { "type": "string", "maxLength": 30 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["phone", "userId"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "One-to-one or group messaging thread",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["direct", "group"] },
+        "participantIds": { "type": "array" },
+        "participantDetails": { "type": "object" },
+        "lastMessage": { "type": "string", "maxLength": 2000 },
+        "lastMessageSenderId": { "type": "string", "maxLength": 128 },
+        "lastMessageAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "type", "participantIds"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Message within a conversation subcollection",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "senderId": { "type": "string", "maxLength": 128 },
+        "senderName": { "type": "string", "maxLength": 80 },
+        "text": { "type": "string", "maxLength": 4000, "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "senderId", "text"]
+    },
+    "ChatLink": {
+      "title": "ChatLink",
+      "description": "Personal and campaign chat links for lead attribution",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "slug": { "type": "string", "maxLength": 60, "pattern": "^[a-zA-Z0-9_-]+$" },
+        "linkName": { "type": "string", "maxLength": 100 },
+        "campaignName": { "type": "string", "maxLength": 100 },
+        "source": { "type": "string", "maxLength": 60 },
+        "isActive": { "type": "boolean" },
+        "clicks": { "type": "number" },
+        "signups": { "type": "number" },
+        "chatsStarted": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "slug", "isActive"]
+    },
+    "LinkEvent": {
+      "title": "LinkEvent",
+      "description": "Analytics events for tracking link clicks, signups, and chat starts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "linkId": { "type": "string", "maxLength": 128 },
+        "affiliateId": { "type": "string", "maxLength": 128 },
+        "eventType": { "type": "string", "enum": ["click", "signup", "chat_start"] },
+        "campaign": { "type": "string", "maxLength": 100 },
+        "source": { "type": "string", "maxLength": 60 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "linkId", "affiliateId", "eventType"]
+    },
+    "Reel": {
+      "title": "Reel",
+      "description": "Admin curated short video embeds with metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "category": { "type": "string", "maxLength": 50 },
+        "videoUrl": { "type": "string", "maxLength": 1000 },
+        "embedUrl": { "type": "string", "maxLength": 1000 },
+        "thumbnailUrl": { "type": "string", "maxLength": 1000 },
+        "isFeatured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "videoUrl", "embedUrl", "isPublished"]
+    },
+    "Webinar": {
+      "title": "Webinar",
+      "description": "Business webinars and training schedules",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "scheduledAt": { "type": "string", "format": "date-time" },
+        "timezone": { "type": "string", "maxLength": 50 },
+        "joinUrl": { "type": "string", "maxLength": 1000 },
+        "isCancelled": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "scheduledAt", "joinUrl", "isPublished"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Administrator business updates and broadcasts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "content": { "type": "string", "maxLength": 3000 },
+        "priority": { "type": "string", "enum": ["low", "normal", "high"] },
+        "isPublished": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "content", "isPublished"]
+    },
+    "LeadPackage": {
+      "title": "LeadPackage",
+      "description": "Packages of leads available for affiliate purchase",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "leadsCount": { "type": "number" },
+        "priceINR": { "type": "number" },
+        "description": { "type": "string", "maxLength": 500 },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["id", "name", "leadsCount", "priceINR", "isActive"]
+    },
+    "LeadPurchaseRequest": {
+      "title": "LeadPurchaseRequest",
+      "description": "Affiliate purchase order requiring manual admin verification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "affiliateId": { "type": "string", "maxLength": 128 },
+        "affiliateName": { "type": "string", "maxLength": 100 },
+        "affiliateEmail": { "type": "string", "maxLength": 150 },
+        "packageId": { "type": "string", "maxLength": 128 },
+        "leadsCount": { "type": "number" },
+        "amountINR": { "type": "number" },
+        "paymentReference": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "notes": { "type": "string", "maxLength": 500 },
+        "reviewedBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "reviewedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "affiliateId", "leadsCount", "amountINR", "status"]
+    },
+    "LeadInventory": {
+      "title": "LeadInventory",
+      "description": "Imported pool of raw leads waiting for admin allocation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 150 },
+        "notes": { "type": "string", "maxLength": 500 },
+        "source": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["available", "assigned", "invalid"] },
+        "assignedAffiliateId": { "type": "string", "maxLength": 128 },
+        "importedAt": { "type": "string", "format": "date-time" },
+        "assignedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "phone", "status"]
+    },
+    "LeadAssignment": {
+      "title": "LeadAssignment",
+      "description": "Allocated leads accessible in affiliate's Lead CRM",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "affiliateId": { "type": "string", "maxLength": 128 },
+        "leadInventoryId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 150 },
+        "status": { "type": "string", "enum": ["new", "called", "not_reachable", "interested", "follow_up_required", "converted", "not_interested", "invalid_number"] },
+        "remarks": { "type": "string", "maxLength": 2000 },
+        "nextFollowUpDate": { "type": "string", "format": "date-time" },
+        "lastContactedAt": { "type": "string", "format": "date-time" },
+        "assignedAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "affiliateId", "name", "phone", "status"]
+    },
+    "LeadLedger": {
+      "title": "LeadLedger",
+      "description": "Immutable balance transaction record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "affiliateId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["credit_purchase", "debit_allocation", "manual_adjustment"] },
+        "amount": { "type": "number" },
+        "balanceAfter": { "type": "number" },
+        "referenceId": { "type": "string", "maxLength": 128 },
+        "notes": { "type": "string", "maxLength": 300 },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "affiliateId", "type", "amount", "balanceAfter"]
+    },
+    "Broadcast": {
+      "title": "Broadcast",
+      "description": "Pro-only broadcast messaging record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "affiliateId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "messageText": { "type": "string", "maxLength": 4000 },
+        "recipientCount": { "type": "number" },
+        "status": { "type": "string", "enum": ["draft", "sent", "cancelled"] },
+        "recipientIds": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "affiliateId", "name", "messageText", "status"]
+    },
+    "InAppNotification": {
+      "title": "InAppNotification",
+      "description": "User in-app notifications",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "recipientId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["message", "lead_allocated", "payment_status", "webinar", "announcement", "pro_status"] },
+        "title": { "type": "string", "maxLength": 150 },
+        "message": { "type": "string", "maxLength": 500 },
+        "relatedEntityId": { "type": "string", "maxLength": 128 },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "recipientId", "title", "message", "isRead"]
+    },
+    "AdminAuditLog": {
+      "title": "AdminAuditLog",
+      "description": "Immutable log of sensitive operations performed by administrators",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "actorId": { "type": "string", "maxLength": 128 },
+        "actorEmail": { "type": "string", "maxLength": 150 },
+        "action": { "type": "string", "maxLength": 80 },
+        "targetEntity": { "type": "string", "maxLength": 80 },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "details": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "actorId", "action", "targetEntity"]
+    },
+    "ApplicationSettings": {
+      "title": "ApplicationSettings",
+      "description": "System-wide configurable pricing and platform settings",
+      "type": "object",
+      "properties": {
+        "proMonthlyINR": { "type": "number" },
+        "proYearlyINR": { "type": "number" },
+        "manualPaymentInstructions": { "type": "string", "maxLength": 2000 },
+        "supportEmail": { "type": "string", "maxLength": 100 },
+        "leadPriceDefaultINR": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["proMonthlyINR", "proYearlyINR"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Public user profiles"
+    },
+    "/userPrivate/{userId}": {
+      "schema": "UserPrivate",
+      "description": "Private profile information with isolated PII"
+    },
+    "/phoneRegistry/{phoneHash}": {
+      "schema": "PhoneRegistry",
+      "description": "Atomic unique phone number mapping"
+    },
+    "/conversations/{conversationId}": {
+      "schema": "Conversation",
+      "description": "Direct and group conversation rooms"
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Real-time conversation messages"
+    },
+    "/chatLinks/{linkId}": {
+      "schema": "ChatLink",
+      "description": "Affiliate personal chat and campaign tracking links"
+    },
+    "/linkEvents/{eventId}": {
+      "schema": "LinkEvent",
+      "description": "Click and conversion telemetry records"
+    },
+    "/reels/{reelId}": {
+      "schema": "Reel",
+      "description": "Admin controlled vertical video reels"
+    },
+    "/webinars/{webinarId}": {
+      "schema": "Webinar",
+      "description": "Webinar schedules and announcements"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "Platform-wide business updates"
+    },
+    "/leadPackages/{packageId}": {
+      "schema": "LeadPackage",
+      "description": "Configurable lead purchase packages"
+    },
+    "/leadPurchaseRequests/{requestId}": {
+      "schema": "LeadPurchaseRequest",
+      "description": "Affiliate lead purchase requests for admin review"
+    },
+    "/leadInventory/{leadId}": {
+      "schema": "LeadInventory",
+      "description": "Admin raw lead pool"
+    },
+    "/leadAssignments/{assignmentId}": {
+      "schema": "LeadAssignment",
+      "description": "Leads assigned to affiliate CRM"
+    },
+    "/leadLedger/{ledgerId}": {
+      "schema": "LeadLedger",
+      "description": "Append-only entitlement and balance logs"
+    },
+    "/broadcasts/{broadcastId}": {
+      "schema": "Broadcast",
+      "description": "Pro broadcast campaign records"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "InAppNotification",
+      "description": "In-app notifications"
+    },
+    "/adminAuditLogs/{logId}": {
+      "schema": "AdminAuditLog",
+      "description": "Immutable administrative audit trail"
+    },
+    "/applicationSettings/{settingId}": {
+      "schema": "ApplicationSettings",
+      "description": "Configurable platform settings"
+    },
+    "/admins/{adminUid}": {
+      "schema": {
+        "title": "AdminRecord",
+        "description": "Administrative authority record",
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "grantedAt": { "type": "string" }
+        }
+      },
+      "description": "Document presence signifies administrator role in Firestore rules"
+    }
+  }
+}

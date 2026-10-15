@@ -1,0 +1,6 @@
+{
+  "name": "Leads Chat",
+  "description": "Business messaging, customer relationship management, lead bank distribution, and campaign analytics platform for affiliates and modern sales teams.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

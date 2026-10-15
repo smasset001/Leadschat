@@ -351,16 +351,16 @@ export const AdminDashboard: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#26282f] dark:border-[#26282f] light:border-slate-200">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
             <ShieldAlert className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+            <h1 className="text-2xl font-bold tracking-tight text-white light:text-slate-900">
               Admin Operations Panel
             </h1>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400 light:text-slate-500">
               Verify lead payments, import raw lead inventory, allocate leads, and manage business content.
             </p>
           </div>
@@ -368,7 +368,7 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Nav Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 no-scrollbar">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-[#26282f] dark:border-[#26282f] light:border-slate-200 no-scrollbar">
         {navTabs.map((t) => {
           const Icon = t.icon;
           const isActive = activeTab === t.id;
@@ -379,7 +379,7 @@ export const AdminDashboard: React.FC = () => {
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
                 isActive
                   ? 'bg-amber-500 text-slate-950 font-bold shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  : 'text-slate-400 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-[#25272e] light:hover:bg-slate-100'
               }`}
             >
               <Icon className="w-4 h-4" />

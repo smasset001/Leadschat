@@ -121,38 +121,48 @@ export const LinksAndAnalyticsSection: React.FC = () => {
           <p className="text-[11px] text-slate-400 mt-1">Unique visitor clicks</p>
         </div>
 
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+        <div className="p-4 sm:p-5 rounded-3xl bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white border border-[#26282f] dark:border-[#26282f] light:border-slate-200 shadow-md">
+          <span className="text-xs font-semibold text-slate-400 light:text-slate-500 uppercase tracking-wider block mb-1">
+            Total Link Clicks
+          </span>
+          <div className="text-2xl sm:text-3xl font-extrabold text-[#ff4545] font-mono tabular-nums">
+            {analytics?.totalClicks || 0}
+          </div>
+          <p className="text-[11px] text-slate-400 light:text-slate-500 mt-1">Unique visitor clicks</p>
+        </div>
+
+        <div className="p-4 sm:p-5 rounded-3xl bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white border border-[#26282f] dark:border-[#26282f] light:border-slate-200 shadow-md">
+          <span className="text-xs font-semibold text-slate-400 light:text-slate-500 uppercase tracking-wider block mb-1">
             Signups Attributed
           </span>
-          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono tabular-nums">
+          <div className="text-2xl sm:text-3xl font-extrabold text-white light:text-slate-900 font-mono tabular-nums">
             {analytics?.totalSignups || 0}
           </div>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <p className="text-[11px] text-slate-400 light:text-slate-500 mt-1">
             {analytics?.signupConversionRate || '0'}% click-to-signup
           </p>
         </div>
 
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+        <div className="p-4 sm:p-5 rounded-3xl bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white border border-[#26282f] dark:border-[#26282f] light:border-slate-200 shadow-md">
+          <span className="text-xs font-semibold text-slate-400 light:text-slate-500 uppercase tracking-wider block mb-1">
             Conversations Started
           </span>
-          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 font-mono tabular-nums">
+          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 light:text-emerald-600 font-mono tabular-nums">
             {analytics?.totalChats || 0}
           </div>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <p className="text-[11px] text-slate-400 light:text-slate-500 mt-1">
             {analytics?.chatConversionRate || '0'}% conversion rate
           </p>
         </div>
 
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+        <div className="p-4 sm:p-5 rounded-3xl bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white border border-[#26282f] dark:border-[#26282f] light:border-slate-200 shadow-md">
+          <span className="text-xs font-semibold text-slate-400 light:text-slate-500 uppercase tracking-wider block mb-1">
             Active Campaign Links
           </span>
-          <div className="text-2xl sm:text-3xl font-extrabold text-purple-600 font-mono tabular-nums">
+          <div className="text-2xl sm:text-3xl font-extrabold text-purple-400 light:text-purple-600 font-mono tabular-nums">
             {links.filter((l) => l.isActive).length}
           </div>
-          <p className="text-[11px] text-slate-400 mt-1">{links.length} total links</p>
+          <p className="text-[11px] text-slate-400 light:text-slate-500 mt-1">{links.length} total links</p>
         </div>
       </div>
 
@@ -160,15 +170,15 @@ export const LinksAndAnalyticsSection: React.FC = () => {
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-lg font-bold text-slate-900">Campaign Tracking Links</h3>
-            <p className="text-xs text-slate-500">
+            <h3 className="text-lg font-bold text-white light:text-slate-900">Campaign Tracking Links</h3>
+            <p className="text-xs text-slate-400 light:text-slate-500">
               Create individual links for Facebook Ads, Instagram, and YouTube descriptions to trace conversion source.
             </p>
           </div>
 
           <button
             onClick={() => setShowCreateModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition cursor-pointer self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-2xl bg-gradient-to-tr from-[#ff3e3e] to-[#ff5c5c] text-white shadow-md neu-coral-glow hover:opacity-95 transition cursor-pointer self-start sm:self-auto"
           >
             <Plus className="w-4 h-4" />
             <span>Create Campaign Link</span>
@@ -176,14 +186,14 @@ export const LinksAndAnalyticsSection: React.FC = () => {
         </div>
 
         {links.length === 0 ? (
-          <div className="p-8 rounded-2xl bg-white border border-slate-200 text-center text-slate-400 text-xs">
+          <div className="p-8 rounded-3xl bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white border border-[#26282f] dark:border-[#26282f] light:border-slate-200 text-center text-slate-400 text-xs">
             No campaign links created yet. Click 'Create Campaign Link' above to set up your first tracking link.
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+          <div className="bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white rounded-3xl border border-[#26282f] dark:border-[#26282f] light:border-slate-200 overflow-hidden shadow-md">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider text-[10px]">
+                <thead className="bg-[#141518] dark:bg-[#141518] light:bg-slate-50 border-b border-[#26282f] dark:border-[#26282f] light:border-slate-200 text-slate-400 light:text-slate-500 font-semibold uppercase tracking-wider text-[10px]">
                   <tr>
                     <th className="px-4 py-3">Link Name / URL</th>
                     <th className="px-4 py-3">Campaign</th>
@@ -194,44 +204,44 @@ export const LinksAndAnalyticsSection: React.FC = () => {
                     <th className="px-4 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-white/5 light:divide-slate-100">
                   {links.map((link) => {
                     const isCopied = copiedSlug === link.slug;
                     return (
-                      <tr key={link.id} className="hover:bg-slate-50">
+                      <tr key={link.id} className="hover:bg-white/5 light:hover:bg-slate-50 transition">
                         <td className="px-4 py-3.5">
-                          <div className="font-bold text-slate-900 leading-tight">
+                          <div className="font-bold text-white light:text-slate-900 leading-tight">
                             {link.linkName}
                           </div>
-                          <span className="text-[11px] font-mono text-blue-600 block mt-0.5">
+                          <span className="text-[11px] font-mono text-[#ff4545] light:text-blue-600 block mt-0.5">
                             /?c={link.slug}
                           </span>
                         </td>
 
-                        <td className="px-4 py-3.5 font-medium text-slate-700">
+                        <td className="px-4 py-3.5 font-medium text-slate-300 light:text-slate-700">
                           {link.campaignName || 'Direct'}
                         </td>
 
-                        <td className="px-4 py-3.5 text-slate-600">
-                          <span className="inline-block px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-semibold">
+                        <td className="px-4 py-3.5 text-slate-400 light:text-slate-600">
+                          <span className="inline-block px-2.5 py-0.5 rounded-md bg-white/5 light:bg-slate-100 text-slate-300 light:text-slate-700 text-[10px] font-semibold">
                             {link.source || 'Organic'}
                           </span>
                         </td>
 
-                        <td className="px-4 py-3.5 font-bold font-mono tabular-nums text-slate-900">
+                        <td className="px-4 py-3.5 font-bold font-mono tabular-nums text-white light:text-slate-900">
                           {link.clicks || 0}
                         </td>
 
-                        <td className="px-4 py-3.5 font-bold font-mono tabular-nums text-emerald-600">
+                        <td className="px-4 py-3.5 font-bold font-mono tabular-nums text-emerald-400 light:text-emerald-600">
                           {link.signups || 0}
                         </td>
 
                         <td className="px-4 py-3.5">
                           <span
-                            className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                            className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${
                               link.isActive
-                                ? 'bg-emerald-100 text-emerald-800'
-                                : 'bg-slate-100 text-slate-500'
+                                ? 'bg-emerald-500/20 text-emerald-300 light:bg-emerald-100 light:text-emerald-800'
+                                : 'bg-white/10 text-slate-400 light:bg-slate-100 light:text-slate-500'
                             }`}
                           >
                             {link.isActive ? 'Active' : 'Disabled'}
@@ -242,17 +252,17 @@ export const LinksAndAnalyticsSection: React.FC = () => {
                           <div className="inline-flex items-center gap-1.5">
                             <button
                               onClick={() => handleCopyLink(link.slug)}
-                              className="p-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 transition cursor-pointer"
+                              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 light:bg-blue-50 light:hover:bg-blue-100 text-slate-300 light:text-blue-700 transition cursor-pointer"
                               title="Copy Link URL"
                             >
-                              {isCopied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                              {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                             </button>
                             <button
                               onClick={() => handleToggle(link.id, link.isActive)}
-                              className={`p-1.5 rounded-lg transition cursor-pointer ${
+                              className={`p-2 rounded-xl transition cursor-pointer ${
                                 link.isActive
-                                  ? 'bg-amber-50 hover:bg-amber-100 text-amber-700'
-                                  : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700'
+                                  ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 light:bg-amber-50 light:text-amber-700'
+                                  : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 light:bg-emerald-50 light:text-emerald-700'
                               }`}
                               title={link.isActive ? 'Disable link' : 'Enable link'}
                             >
@@ -272,13 +282,13 @@ export const LinksAndAnalyticsSection: React.FC = () => {
 
       {/* Traffic Source Breakdown */}
       {analytics && Object.keys(analytics.sourceMap).length > 0 && (
-        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
-          <h3 className="text-base font-bold text-slate-900">Traffic Source Distribution</h3>
+        <div className="p-6 rounded-3xl bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white border border-[#26282f] dark:border-[#26282f] light:border-slate-200 shadow-md space-y-4">
+          <h3 className="text-base font-bold text-white light:text-slate-900">Traffic Source Distribution</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {Object.entries(analytics.sourceMap).map(([src, count]) => (
-              <div key={src} className="p-3 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-xs font-semibold text-slate-600 block">{src}</span>
-                <span className="text-lg font-bold text-slate-900 font-mono tabular-nums">
+              <div key={src} className="p-3.5 rounded-2xl bg-[#141518] dark:bg-[#141518] light:bg-slate-50 border border-white/5 light:border-slate-100">
+                <span className="text-xs font-semibold text-slate-400 light:text-slate-600 block">{src}</span>
+                <span className="text-lg font-bold text-white light:text-slate-900 font-mono tabular-nums">
                   {count} events
                 </span>
               </div>
@@ -289,28 +299,28 @@ export const LinksAndAnalyticsSection: React.FC = () => {
 
       {/* Create Link Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-slate-200 text-slate-900">
-            <h3 className="text-base font-bold text-slate-900 mb-1">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md rounded-3xl bg-[#1c1d22] dark:bg-[#1c1d22] light:bg-white p-6 shadow-2xl border border-[#26282f] dark:border-[#26282f] light:border-slate-200 text-white light:text-slate-900">
+            <h3 className="text-base font-bold text-white light:text-slate-900 mb-1">
               Create Campaign Chat Link
             </h3>
-            <p className="text-xs text-slate-500 mb-4">
+            <p className="text-xs text-slate-400 light:text-slate-500 mb-4">
               Visitors opening this link will land on your business profile and automatically open a conversation with you upon signup.
             </p>
 
             {errorMsg && (
-              <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs">
+              <div className="mb-4 p-3 rounded-2xl bg-red-950/40 border border-red-500/40 text-red-200 light:bg-red-50 light:border-red-200 light:text-red-700 text-xs">
                 {errorMsg}
               </div>
             )}
 
             <form onSubmit={handleCreateLink} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 light:text-slate-700 mb-1">
                   Link Slug (URL Path) *
                 </label>
-                <div className="flex items-center rounded-xl border border-slate-300 overflow-hidden focus-within:ring-2 focus-within:ring-blue-600">
-                  <span className="px-3 py-2 bg-slate-100 text-slate-500 text-xs font-mono shrink-0">
+                <div className="flex items-center rounded-2xl border border-white/10 light:border-slate-300 overflow-hidden focus-within:ring-2 focus-within:ring-[#ff4545] bg-[#141518] dark:bg-[#141518] light:bg-slate-50">
+                  <span className="px-3.5 py-2.5 bg-white/5 light:bg-slate-200 text-slate-400 light:text-slate-600 text-xs font-mono shrink-0">
                     /?c=
                   </span>
                   <input
@@ -319,13 +329,13 @@ export const LinksAndAnalyticsSection: React.FC = () => {
                     value={slug}
                     onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, '-'))}
                     placeholder="my-fb-campaign"
-                    className="w-full px-3 py-2 text-sm focus:outline-hidden"
+                    className="w-full px-3.5 py-2.5 text-sm bg-transparent text-white light:text-slate-900 focus:outline-hidden"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 light:text-slate-700 mb-1">
                   Link Title *
                 </label>
                 <input
@@ -334,12 +344,12 @@ export const LinksAndAnalyticsSection: React.FC = () => {
                   value={linkName}
                   onChange={(e) => setLinkName(e.target.value)}
                   placeholder="e.g. Facebook Ads - Scale Offer"
-                  className="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-[#141518] dark:bg-[#141518] light:bg-slate-50 text-white light:text-slate-900 border border-white/10 light:border-slate-300 rounded-2xl focus:outline-hidden focus:ring-2 focus:ring-[#ff4545]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 light:text-slate-700 mb-1">
                   Campaign Tag
                 </label>
                 <input
@@ -347,25 +357,25 @@ export const LinksAndAnalyticsSection: React.FC = () => {
                   value={campaignName}
                   onChange={(e) => setCampaignName(e.target.value)}
                   placeholder="e.g. Webinar Launch 2026"
-                  className="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3.5 py-2.5 text-sm bg-[#141518] dark:bg-[#141518] light:bg-slate-50 text-white light:text-slate-900 border border-white/10 light:border-slate-300 rounded-2xl focus:outline-hidden focus:ring-2 focus:ring-[#ff4545]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 light:text-slate-700 mb-1">
                   Source Channel
                 </label>
                 <select
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600 bg-white"
+                  className="w-full px-3.5 py-2.5 text-sm bg-[#141518] dark:bg-[#141518] light:bg-slate-50 text-white light:text-slate-900 border border-white/10 light:border-slate-300 rounded-2xl focus:outline-hidden focus:ring-2 focus:ring-[#ff4545]"
                 >
-                  <option value="Facebook">Facebook Ads</option>
-                  <option value="Instagram">Instagram Bio / Story</option>
-                  <option value="YouTube">YouTube Description</option>
-                  <option value="WhatsApp">WhatsApp Community</option>
-                  <option value="Direct">Direct Outreach</option>
-                  <option value="Organic">Organic Search</option>
+                  <option value="Facebook" className="bg-[#1c1d22] light:bg-white text-white light:text-slate-900">Facebook Ads</option>
+                  <option value="Instagram" className="bg-[#1c1d22] light:bg-white text-white light:text-slate-900">Instagram Bio / Story</option>
+                  <option value="YouTube" className="bg-[#1c1d22] light:bg-white text-white light:text-slate-900">YouTube Description</option>
+                  <option value="WhatsApp" className="bg-[#1c1d22] light:bg-white text-white light:text-slate-900">WhatsApp Community</option>
+                  <option value="Direct" className="bg-[#1c1d22] light:bg-white text-white light:text-slate-900">Direct Outreach</option>
+                  <option value="Organic" className="bg-[#1c1d22] light:bg-white text-white light:text-slate-900">Organic Search</option>
                 </select>
               </div>
 
@@ -373,14 +383,14 @@ export const LinksAndAnalyticsSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 rounded-xl cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creating}
-                  className="px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 text-xs font-bold text-white bg-gradient-to-tr from-[#ff3e3e] to-[#ff5c5c] rounded-2xl shadow-md neu-coral-glow hover:opacity-95 transition cursor-pointer disabled:opacity-50"
                 >
                   {creating ? 'Creating...' : 'Create Link'}
                 </button>

@@ -5,7 +5,7 @@ import { ChatWindow } from './ChatWindow';
 import { CreateGroupModal } from './CreateGroupModal';
 import { useAuth } from '../../context/AuthContext';
 import { listenToConversations } from '../../services/chatService';
-import { MessageSquare, Share2 } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 
 interface ChatsViewProps {
   initialConversationId?: string | null;
@@ -31,12 +31,10 @@ export const ChatsView: React.FC<ChatsViewProps> = ({
     const unsub = listenToConversations(currentUser.uid, (convs) => {
       setConversations(convs);
 
-      // If initial conversation ID specified, auto-select it
       if (initialConversationId) {
         const found = convs.find((c) => c.id === initialConversationId);
         if (found) setSelectedConversation(found);
       } else if (!selectedConversation && convs.length > 0 && window.innerWidth >= 768) {
-        // Desktop default select first conversation
         setSelectedConversation(convs[0]);
       }
     });
@@ -46,7 +44,7 @@ export const ChatsView: React.FC<ChatsViewProps> = ({
 
   return (
     <div className="h-[calc(100vh-4rem)] max-w-7xl mx-auto md:p-4">
-      <div className="h-full bg-white md:rounded-2xl md:border md:border-slate-200 shadow-xs overflow-hidden flex flex-col md:flex-row">
+      <div className="h-full bg-[#18191d] dark:bg-[#18191d] light:bg-white md:rounded-3xl md:border md:border-[#25272e] light:md:border-slate-200 neu-dark-flat light:neu-light-flat shadow-2xl overflow-hidden flex flex-col md:flex-row transition-colors">
         {/* Left Column: Conversation List */}
         <div
           className={`w-full md:w-80 lg:w-96 h-full flex-col ${
@@ -74,13 +72,15 @@ export const ChatsView: React.FC<ChatsViewProps> = ({
               onBack={() => setSelectedConversation(null)}
             />
           ) : (
-            <div className="h-full flex flex-col items-center justify-center p-8 text-center bg-slate-50/50">
-              <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200 flex items-center justify-center mb-4 text-slate-300 shadow-2xs">
+            <div className="h-full flex flex-col items-center justify-center p-8 text-center bg-[#141518] dark:bg-[#141518] light:bg-[#f6f8fb]">
+              <div className="w-16 h-16 rounded-full bg-[#23252c] dark:bg-[#23252c] light:bg-white flex items-center justify-center mb-4 text-[#ff4545] shadow-xl border border-white/5 light:border-slate-200">
                 <MessageSquare className="w-8 h-8" />
               </div>
-              <h3 className="text-base font-bold text-slate-800">No Chat Selected</h3>
-              <p className="text-xs text-slate-500 max-w-sm mt-1">
-                Select an active conversation on the left, or share your campaign links with clients to receive inbound business leads.
+              <h3 className="text-base font-bold text-white light:text-slate-900">
+                No Chat Selected
+              </h3>
+              <p className="text-xs text-slate-400 light:text-slate-500 max-w-sm mt-1 leading-relaxed">
+                Choose a conversation from the left to start messaging, or copy your personal link to invite new clients.
               </p>
             </div>
           )}

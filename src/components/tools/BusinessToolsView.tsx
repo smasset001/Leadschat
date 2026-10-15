@@ -32,19 +32,19 @@ export const BusinessToolsView: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#26282f] dark:border-[#26282f] light:border-slate-200 transition-colors">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#ff4545]">
               Affiliate Operations
             </span>
             {isPro && (
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-800 uppercase tracking-wider">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#ff4545]/20 text-[#ff4545] border border-[#ff4545]/30 uppercase tracking-wider">
                 Pro Activated
               </span>
             )}
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-bold tracking-tight text-white dark:text-white light:text-slate-900">
             Business Suite & Lead Hub
           </h1>
         </div>
@@ -53,7 +53,7 @@ export const BusinessToolsView: React.FC = () => {
         {!isPro && (
           <button
             onClick={() => setActiveSubTab('pricing')}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-semibold shadow-xs hover:opacity-95 transition cursor-pointer self-start sm:self-auto"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-tr from-[#ff3e3e] to-[#ff5c5c] text-white text-xs font-bold shadow-md neu-coral-glow hover:opacity-95 transition cursor-pointer self-start sm:self-auto"
           >
             <Sparkles className="w-4 h-4" />
             <span>Unlock Pro Features</span>
@@ -62,7 +62,7 @@ export const BusinessToolsView: React.FC = () => {
       </div>
 
       {/* Subtab Segmented Navigation */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 no-scrollbar">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-[#26282f] dark:border-[#26282f] light:border-slate-200 no-scrollbar">
         {subTabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeSubTab === tab.id;
@@ -72,8 +72,8 @@ export const BusinessToolsView: React.FC = () => {
               onClick={() => setActiveSubTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
                 isActive
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  ? 'bg-gradient-to-tr from-[#ff3e3e] to-[#ff5c5c] text-white shadow-md neu-coral-glow'
+                  : 'text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-[#23252c] dark:hover:bg-[#23252c] light:hover:bg-slate-100'
               }`}
             >
               <Icon className="w-4 h-4" />

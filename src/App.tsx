@@ -18,8 +18,11 @@ import { AuthModal } from './components/auth/AuthModal';
 import { OfflineIndicator } from './components/common/OfflineIndicator';
 import { getOrCreateDirectConversation } from './services/chatService';
 
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+
 function AppContent() {
   const { currentUser, userProfile, isAdmin, loading } = useAuth();
+  const { theme } = useTheme();
   const [currentTab, setCurrentTab] = useState<string>('chats');
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [publicSlug, setPublicSlug] = useState<string | null>(null);
@@ -70,9 +73,9 @@ function AppContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center text-white">
+      <div className="min-h-screen bg-[#121316] flex items-center justify-center text-white">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg">
+          <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#ff3e3e] to-[#ff5c5c] flex items-center justify-center text-white font-black text-xl neu-coral-glow shadow-xl">
             LC
           </div>
           <span className="text-xs font-semibold text-slate-400">Loading Leads Chat...</span>
@@ -84,13 +87,13 @@ function AppContent() {
   // If viewing a public link destination
   if (publicSlug) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-        <header className="px-6 py-4 bg-slate-900 border-b border-slate-800 text-white flex items-center justify-between">
+      <div className="min-h-screen bg-[#121316] dark:bg-[#121316] light:bg-[#f0f2f7] text-white light:text-slate-900 flex flex-col justify-between transition-colors">
+        <header className="px-6 py-4 bg-[#18191d] dark:bg-[#18191d] light:bg-white border-b border-[#25272e] light:border-slate-200 text-white light:text-slate-900 flex items-center justify-between">
           <button
             onClick={() => setPublicSlug(null)}
-            className="flex items-center gap-2 font-bold tracking-tight text-white cursor-pointer"
+            className="flex items-center gap-2 font-bold tracking-tight text-white light:text-slate-900 cursor-pointer"
           >
-            <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-xs">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#ff3e3e] to-[#ff5c5c] flex items-center justify-center text-white text-xs font-black neu-coral-glow">
               LC
             </div>
             <span>Leads Chat</span>
@@ -98,7 +101,7 @@ function AppContent() {
           {!currentUser && (
             <button
               onClick={() => setAuthModalOpen(true)}
-              className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs"
+              className="px-3.5 py-1.5 rounded-xl bg-[#ff4545] hover:opacity-90 text-white text-xs font-bold neu-coral-glow transition"
             >
               Sign In
             </button>
@@ -115,7 +118,7 @@ function AppContent() {
           onOpenAuth={() => setAuthModalOpen(true)}
         />
 
-        <footer className="py-4 text-center text-xs text-slate-400 border-t border-slate-200 bg-white">
+        <footer className="py-4 text-center text-xs text-slate-500 border-t border-[#25272e] light:border-slate-200 bg-[#18191d] dark:bg-[#18191d] light:bg-white">
           Leads Chat &bull; Business Messaging & Customer Relationship Platform
         </footer>
 
@@ -129,7 +132,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col pb-16 md:pb-0">
+    <div className="min-h-screen bg-[#121316] dark:bg-[#121316] light:bg-[#f0f2f7] text-white light:text-slate-900 flex flex-col pb-20 md:pb-0 transition-colors">
       <Navbar
         currentTab={currentTab}
         onSelectTab={(tab) => setCurrentTab(tab)}
@@ -171,8 +174,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

@@ -13,14 +13,14 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentTab, onSelectTab })
   const tabs = [
     { id: 'chats', label: 'Chats', icon: MessageSquare },
     { id: 'reels', label: 'Reels', icon: Film },
-    { id: 'webinars', label: 'Webinars', icon: Calendar },
-    { id: 'tools', label: isPro ? 'Pro Tools' : 'Tools', icon: Briefcase },
+    { id: 'webinars', label: 'Events', icon: Calendar },
+    { id: 'tools', label: isPro ? 'Pro' : 'Tools', icon: Briefcase },
     { id: 'profile', label: 'Profile', icon: User },
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900 border-t border-slate-800 text-slate-400 py-1 px-2 safe-area-pb shadow-lg">
-      <div className="grid grid-cols-5 gap-1 items-center justify-around">
+    <div className="md:hidden fixed bottom-3 left-4 right-4 z-40 pointer-events-none">
+      <nav className="pointer-events-auto max-w-sm mx-auto px-3 py-2 rounded-3xl bg-[#1b1c21]/95 dark:bg-[#1b1c21]/95 light:bg-white/95 backdrop-blur-md border border-white/10 light:border-slate-300/80 shadow-2xl flex items-center justify-around neu-dark-flat light:neu-light-flat">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = currentTab === tab.id;
@@ -28,18 +28,32 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentTab, onSelectTab })
             <button
               key={tab.id}
               onClick={() => onSelectTab(tab.id)}
-              className={`flex flex-col items-center justify-center py-2 px-1 rounded-lg text-[11px] font-medium transition cursor-pointer min-h-[48px] ${
+              className={`flex flex-col items-center justify-center p-2 rounded-2xl transition-all cursor-pointer relative ${
                 isActive
-                  ? 'text-blue-400 font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'text-[#ff4545] font-bold scale-105'
+                  : 'text-slate-400 light:text-slate-500 hover:text-white light:hover:text-slate-900'
               }`}
             >
-              <Icon className={`w-5 h-5 mb-0.5 ${isActive ? 'text-blue-400 stroke-[2.2]' : 'stroke-[1.8]'}`} />
-              <span className="truncate max-w-[56px]">{tab.label}</span>
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                  isActive
+                    ? 'bg-[#25272e] dark:bg-[#25272e] light:bg-slate-100 neu-dark-btn-active light:neu-light-btn-active text-[#ff4545] shadow-inner'
+                    : 'neu-dark-btn light:neu-light-btn'
+                }`}
+              >
+                <Icon
+                  className={`w-5 h-5 ${
+                    isActive ? 'text-[#ff4545] fill-current/20 stroke-[2.2]' : 'stroke-[1.8]'
+                  }`}
+                />
+              </div>
+              <span className="text-[10px] mt-1 font-semibold tracking-tight">
+                {tab.label}
+              </span>
             </button>
           );
         })}
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
